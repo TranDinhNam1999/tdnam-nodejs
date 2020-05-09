@@ -19,7 +19,7 @@ router.get('/', asyncHandler(function _callee(req, res) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return regeneratorRuntime.awrap(Todo.findAllNotDone(req.currentUserId.id));
+          return regeneratorRuntime.awrap(Todo.findAllNotDone(req.currentUser.id));
 
         case 2:
           todos = _context.sent;
@@ -47,7 +47,7 @@ router.get('/:id/done', asyncHandler(function _callee2(req, res) {
         case 3:
           todos = _context2.sent;
 
-          if (!(todos && todos.userId === req.currentUserId.id)) {
+          if (!(todos && todos.userId === req.currentUser.id)) {
             _context2.next = 7;
             break;
           }
