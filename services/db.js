@@ -1,11 +1,7 @@
-const { Client } = require("pg");
-const client = new Client({
-    user: "yujeunvafgnwbm",
-    host: "ec2-34-192-30-15.compute-1.amazonaws.com",
-    database: "d9b370qs70aghm",
-    password: "86074cf0d1e902d170018da36172f46a42f3318e0871b94f0f6d6e931a151faa",
-    port: 5432,
-    ssl: true
-});
+const Sequelize = require('sequelize');
 
-module.exports = client
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:0981045832@localhost:5432/todo';
+
+const db = new Sequelize(connectionString);
+
+module.exports = db;

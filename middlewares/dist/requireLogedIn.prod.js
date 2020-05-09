@@ -1,0 +1,1 @@
+"use strict";module.exports=function(e,r,t){e.currentUser?t():r.redirect("/")};
