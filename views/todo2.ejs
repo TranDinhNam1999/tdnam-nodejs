@@ -1,0 +1,11 @@
+<%- include('header', {title: 'Todo list', css: '', js: ''}); -%>
+    <p>Work form home</p>
+    <ul>
+        <% todos.forEach(function(t){ %>
+            <li>
+                <%= t.name %>
+                    <a href="/todo2/<%= t.id %>/done" role="button" class="btn btn-success">Done</a>
+            </li>
+            <% }); %>
+    </ul>
+    <%- include('footer'); -%>

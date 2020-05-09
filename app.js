@@ -23,7 +23,10 @@ app.set('view engine', 'ejs');
 app.use('/login', require('./routes/login.route'));
 app.get('/logout', require('./routes/logout'));
 app.use('/profile', require('./routes/profile'));
-app.get('/todo', require('./routes/todo'));
+app.use('/todo2', require('./routes/todos'));
+app.get('/todo', function(req, res) {
+    res.render('todo');
+})
 
 app.get('/testlogin', function(req, res) {
     res.render('testlogin');
@@ -33,7 +36,10 @@ app.use(express.static('public'));
 
 app.get('/', require('./routes/index'));
 
-
-app.listen(port, function(req, res) {
-    console.log("server action on port: " + port);
+db.sync().then(function() {
+    app.listen(port, function(req, res) {
+        console.log("server action on port: " + port);
+    });
+}).catch(function(err) {
+    console.error(err);
 });
