@@ -8,7 +8,7 @@ router.use(ensuareLogIn);
 
 router.get('/', asyncHandler(async function(req, res) {
     const todos = await Todo.findAllNotDone(req.currentUser.id);
-    res.render('todo2', { todos });
+    res.render('todo', { todos });
 }));
 
 router.get('/:id/done', asyncHandler(async function(req, res) {
@@ -17,8 +17,15 @@ router.get('/:id/done', asyncHandler(async function(req, res) {
     if (todos && todos.userId === req.currentUser.id) {
         await todos.markAsDone();
     }
-    res.redirect('/todo2');
+    res.redirect('/todo');
 }));
 
+router.post('/', asyncHandler(async function(req, res) {
+    const name = req.body.nametodo;
+    if (name) {
+        await Todo.add(name, req.currentUser.id);
+        res.redirect('/todo');
+    }
+}));
 
 module.exports = router;

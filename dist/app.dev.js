@@ -27,10 +27,7 @@ app.set('view engine', 'ejs');
 app.use('/login', require('./routes/login.route'));
 app.get('/logout', require('./routes/logout'));
 app.use('/profile', require('./routes/profile'));
-app.use('/todo2', require('./routes/todos'));
-app.get('/todo', function (req, res) {
-  res.render('todo');
-});
+app.use('/todo', require('./routes/todos'));
 app.get('/testlogin', function (req, res) {
   res.render('testlogin');
 });
