@@ -23,7 +23,7 @@ router.get('/', asyncHandler(function _callee(req, res) {
 
         case 2:
           todos = _context.sent;
-          res.render('todo2', {
+          res.render('todo', {
             todos: todos
           });
 
@@ -56,11 +56,37 @@ router.get('/:id/done', asyncHandler(function _callee2(req, res) {
           return regeneratorRuntime.awrap(todos.markAsDone());
 
         case 7:
-          res.redirect('/todo2');
+          res.redirect('/todo');
 
         case 8:
         case "end":
           return _context2.stop();
+      }
+    }
+  });
+}));
+router.post('/', asyncHandler(function _callee3(req, res) {
+  var name;
+  return regeneratorRuntime.async(function _callee3$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          name = req.body.nametodo;
+
+          if (!name) {
+            _context3.next = 5;
+            break;
+          }
+
+          _context3.next = 4;
+          return regeneratorRuntime.awrap(Todo.add(name, req.currentUser.id));
+
+        case 4:
+          res.redirect('/todo');
+
+        case 5:
+        case "end":
+          return _context3.stop();
       }
     }
   });
