@@ -40,6 +40,9 @@ User.init({
         type: Sequelize.STRING,
         allowNull: false,
     },
+    tooken: {
+        type: Sequelize.STRING,
+    },
 }, {
     sequelize: db,
     modelName: 'users',

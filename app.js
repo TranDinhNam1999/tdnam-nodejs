@@ -21,6 +21,7 @@ app.use(require('./middlewares/auth'));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 app.use('/login', require('./routes/login.route'));
+app.use('/register', require('./routes/register'));
 app.get('/logout', require('./routes/logout'));
 app.use('/profile', require('./routes/profile'));
 app.use('/todo', require('./routes/todos'));

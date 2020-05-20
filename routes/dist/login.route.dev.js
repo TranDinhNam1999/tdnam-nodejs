@@ -43,4 +43,33 @@ router.post('/', asyncHandler(function postLogin(req, res) {
     }
   });
 }));
+router.get('/:id/:tooken', asyncHandler(function _callee(req, res) {
+  var _req$params, id, tooken, user;
+
+  return regeneratorRuntime.async(function _callee$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _req$params = req.params, id = _req$params.id, tooken = _req$params.tooken;
+          _context2.next = 3;
+          return regeneratorRuntime.awrap(User.findUserById(id));
+
+        case 3:
+          user = _context2.sent;
+
+          if (user && user.tooken === tooken) {
+            user.tooken == null;
+            user.save();
+            req.session.userId = user.id;
+          }
+
+          res.redirect('/');
+
+        case 6:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  });
+}));
 module.exports = router;

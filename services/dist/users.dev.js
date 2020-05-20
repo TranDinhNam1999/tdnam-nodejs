@@ -102,6 +102,9 @@ User.init({
   password: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  tooken: {
+    type: Sequelize.STRING
   }
 }, {
   sequelize: db,
