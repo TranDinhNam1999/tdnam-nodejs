@@ -58,7 +58,7 @@ body('displayName').trim().notEmpty(), body('password').isLength({
         case 6:
           user = _context.sent;
           _context.next = 9;
-          return regeneratorRuntime.awrap(Email.send(user.email, 'Ma Kich Hoat Tai Khoan', "http://localhost:3000/login/".concat(user.id, "/").concat(user.tooken)));
+          return regeneratorRuntime.awrap(Email.send(user.email, 'Ma Kich Hoat Tai Khoan', "".concat(process.env.BASE_URL, "/login/").concat(user.id, "/").concat(user.tooken)));
 
         case 9:
           res.redirect('/');

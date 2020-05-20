@@ -41,7 +41,7 @@ router.post('/', [
         password: User.hashPassword(req.body.password),
         tooken: crypto.randomBytes(3).toString('hex').toUpperCase(),
     });
-    await Email.send(user.email, 'Ma Kich Hoat Tai Khoan', `http://localhost:3000/login/${user.id}/${user.tooken}`);
+    await Email.send(user.email, 'Ma Kich Hoat Tai Khoan', `${process.env.BASE_URL}/login/${user.id}/${user.tooken}`);
     res.redirect('/');
 }));
 
