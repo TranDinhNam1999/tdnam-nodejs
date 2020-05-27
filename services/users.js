@@ -9,6 +9,10 @@ class User extends Model {
         return User.findByPk(id);
     }
 
+    static async findAllUser() {
+        return User.findAll({});
+    }
+
     static async findUserByEmail(email) {
         return User.findOne({
             where: {

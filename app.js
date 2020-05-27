@@ -25,7 +25,7 @@ app.use('/register', require('./routes/register'));
 app.get('/logout', require('./routes/logout'));
 app.use('/profile', require('./routes/profile'));
 app.use('/todo', require('./routes/todos'));
-
+app.use('/news', require('./routes/news'));
 app.get('/testlogin', function(req, res) {
     res.render('testlogin');
 })

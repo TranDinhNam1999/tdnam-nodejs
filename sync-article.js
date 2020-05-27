@@ -3,6 +3,9 @@ const db = require('./services/db');
 const Bluebird = require('bluebird');
 const Article = require('./services/article');
 const parser = new Parser();
+const Email = require('../services/email');
+const User = require('../services/users');
+
 
 const VNEPRESS_RSS = 'https://vnexpress.net/rss/tin-moi-nhat.rss';
 const THANHNIEN_RSS = 'https://thanhnien.vn/rss/home.rss';
@@ -34,6 +37,15 @@ db.sync().then(async function() {
                 }
             })
         });
+
+        const namemail = await User.findAllUser();
+
+        await Bluebird(namemail.email, async function(e) {
+            if (!e) return;
+
+            await Email.send(e.email, 'Tin Tuc Covid-19 Moi', `${process.env.BASE_URL}/news`);
+        });
+
         await Bluebird.delay(SYNC_INTERVAL);
     }
 

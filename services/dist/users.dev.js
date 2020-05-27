@@ -54,13 +54,29 @@ function (_Model) {
       });
     }
   }, {
-    key: "findUserByEmail",
-    value: function findUserByEmail(email) {
-      return regeneratorRuntime.async(function findUserByEmail$(_context2) {
+    key: "findAllUser",
+    value: function findAllUser() {
+      return regeneratorRuntime.async(function findAllUser$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              return _context2.abrupt("return", User.findOne({
+              return _context2.abrupt("return", User.findAll({}));
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "findUserByEmail",
+    value: function findUserByEmail(email) {
+      return regeneratorRuntime.async(function findUserByEmail$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", User.findOne({
                 where: {
                   email: email
                 }
@@ -68,7 +84,7 @@ function (_Model) {
 
             case 1:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
       });

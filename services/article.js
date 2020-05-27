@@ -4,7 +4,6 @@ const Model = Sequelize.Model;
 
 class Article extends Model {
 
-
 };
 
 Article.init({

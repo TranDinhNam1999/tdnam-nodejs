@@ -9,16 +9,22 @@ var Bluebird = require('bluebird');
 var Article = require('./services/article');
 
 var parser = new Parser();
+
+var Email = require('../services/email');
+
+var User = require('../services/users');
+
 var VNEPRESS_RSS = 'https://vnexpress.net/rss/tin-moi-nhat.rss';
 var THANHNIEN_RSS = 'https://thanhnien.vn/rss/home.rss';
 var rssList = [VNEPRESS_RSS, THANHNIEN_RSS];
 var SYNC_INTERVAL = Number(process.env.SYNC_INTERVAL || 60000);
-db.sync().then(function _callee3() {
-  return regeneratorRuntime.async(function _callee3$(_context3) {
+db.sync().then(function _callee4() {
+  var namemail;
+  return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          _context3.next = 2;
+          _context4.next = 2;
           return regeneratorRuntime.awrap(Bluebird.each(rssList, function _callee2(rss) {
             var feed;
             return regeneratorRuntime.async(function _callee2$(_context2) {
@@ -86,16 +92,47 @@ db.sync().then(function _callee3() {
           }));
 
         case 2:
-          _context3.next = 4;
-          return regeneratorRuntime.awrap(Bluebird.delay(SYNC_INTERVAL));
+          _context4.next = 4;
+          return regeneratorRuntime.awrap(User.findAllUser());
 
         case 4:
-          _context3.next = 0;
+          namemail = _context4.sent;
+          _context4.next = 7;
+          return regeneratorRuntime.awrap(Bluebird(namemail.email, function _callee3(e) {
+            return regeneratorRuntime.async(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    if (e) {
+                      _context3.next = 2;
+                      break;
+                    }
+
+                    return _context3.abrupt("return");
+
+                  case 2:
+                    _context3.next = 4;
+                    return regeneratorRuntime.awrap(Email.send(e.email, 'Tin Tuc Covid-19 Moi', "".concat(process.env.BASE_URL, "/news")));
+
+                  case 4:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            });
+          }));
+
+        case 7:
+          _context4.next = 9;
+          return regeneratorRuntime.awrap(Bluebird.delay(SYNC_INTERVAL));
+
+        case 9:
+          _context4.next = 0;
           break;
 
-        case 6:
+        case 11:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
   });

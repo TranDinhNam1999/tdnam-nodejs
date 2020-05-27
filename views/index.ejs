@@ -16,6 +16,7 @@
                 </li>
             </ul>
         </nav>
+        <a href="<% if(currentUser){ %>/news<% } else { %> / <% } %>" class="cta"><button class="buttonmenu" onclick="check_login()">News</button></a>
         <a href="<% if(currentUser){ %>/todo<% } else { %> / <% } %>" class="cta"><button onclick="check_login()">To do</button></a>
     </header>
     <div class="div_todo">
