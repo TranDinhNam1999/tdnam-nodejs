@@ -10,9 +10,10 @@ var Article = require('./services/article');
 
 var parser = new Parser();
 
-var Email = require('../services/email');
+var _require = require('./services/email'),
+    send = _require.send;
 
-var User = require('../services/users');
+var User = require('./services/users');
 
 var VNEPRESS_RSS = 'https://vnexpress.net/rss/tin-moi-nhat.rss';
 var THANHNIEN_RSS = 'https://thanhnien.vn/rss/home.rss';

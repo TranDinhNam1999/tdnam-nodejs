@@ -1,0 +1,1 @@
+"use strict";var passport=require("../middlewares/passport");module.exports=function(r,e){r.logout(),e.redirect("/")};

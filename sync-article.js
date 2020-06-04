@@ -3,8 +3,8 @@ const db = require('./services/db');
 const Bluebird = require('bluebird');
 const Article = require('./services/article');
 const parser = new Parser();
-const Email = require('../services/email');
-const User = require('../services/users');
+const { send } = require('./services/email');
+const User = require('./services/users');
 
 
 const VNEPRESS_RSS = 'https://vnexpress.net/rss/tin-moi-nhat.rss';
@@ -14,8 +14,10 @@ const SYNC_INTERVAL = Number(process.env.SYNC_INTERVAL || 60000);
 
 db.sync().then(async function() {
     for (;;) {
+
         await Bluebird.each(rssList, async function(rss) {
             const feed = await parser.parseURL(rss);
+
 
             await Bluebird.each(feed.items, async function(item) {
                 if (!item.link) {

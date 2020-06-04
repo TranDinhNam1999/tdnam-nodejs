@@ -2,12 +2,9 @@ const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
 const router = new Router();
 const Todo = require('../services/todos');
-const ensuareLogIn = require('../middlewares/requireLogedIn');
-
-router.use(ensuareLogIn);
 
 router.get('/', asyncHandler(async function(req, res) {
-    const todos = await Todo.findAllNotDone(req.currentUser.id);
+    const todos = await Todo.findAllNotDone(req.user.id);
     res.render('todo', { todos });
 }));
 
@@ -23,7 +20,7 @@ router.get('/:id/done', asyncHandler(async function(req, res) {
 router.post('/', asyncHandler(async function(req, res) {
     const name = req.body.nametodo;
     if (name) {
-        await Todo.add(name, req.currentUser.id);
+        await Todo.add(name, req.user.id);
         res.redirect('/todo');
     }
 }));

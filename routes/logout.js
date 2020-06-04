@@ -1,4 +1,6 @@
-module.exports = function logout(req, res){
-    delete req.session.userId;
+const passport = require('../middlewares/passport');
+
+module.exports = function logout(req, res) {
+    req.logout();
     res.redirect('/');
 }

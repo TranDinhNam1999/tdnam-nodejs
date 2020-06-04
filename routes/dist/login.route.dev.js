@@ -5,57 +5,32 @@ var _require = require('express'),
 
 var asyncHandler = require('express-async-handler');
 
-var router = new Router();
-
 var User = require('../services/users');
 
+var passport = require('../middlewares/passport');
+
+var router = new Router();
 router.get('/', function getLogin(req, res) {
   res.render('login');
 });
-router.post('/', asyncHandler(function postLogin(req, res) {
-  var user, checkPassword;
-  return regeneratorRuntime.async(function postLogin$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          _context.next = 2;
-          return regeneratorRuntime.awrap(User.findUserByEmail(req.body.email));
-
-        case 2:
-          user = _context.sent;
-          checkPassword = User.verifyPassword(req.body.password, user.password);
-
-          if (!(!user || !checkPassword)) {
-            _context.next = 6;
-            break;
-          }
-
-          return _context.abrupt("return", res.render('login'));
-
-        case 6:
-          req.session.userId = user.id;
-          res.redirect('/');
-
-        case 8:
-        case "end":
-          return _context.stop();
-      }
-    }
-  });
+router.post('/', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
 }));
 router.get('/:id/:tooken', asyncHandler(function _callee(req, res) {
   var _req$params, id, tooken, user;
 
-  return regeneratorRuntime.async(function _callee$(_context2) {
+  return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context.prev = _context.next) {
         case 0:
           _req$params = req.params, id = _req$params.id, tooken = _req$params.tooken;
-          _context2.next = 3;
+          _context.next = 3;
           return regeneratorRuntime.awrap(User.findUserById(id));
 
         case 3:
-          user = _context2.sent;
+          user = _context.sent;
 
           if (user && user.tooken === tooken) {
             user.tooken == null;
@@ -67,7 +42,7 @@ router.get('/:id/:tooken', asyncHandler(function _callee(req, res) {
 
         case 6:
         case "end":
-          return _context2.stop();
+          return _context.stop();
       }
     }
   });

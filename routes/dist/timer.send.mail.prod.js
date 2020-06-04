@@ -1,0 +1,1 @@
+"use strict";module.exports=function(){return setInterval(function(){console.log("Cant stop me now!")},1500)};

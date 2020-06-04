@@ -5,15 +5,9 @@ var _require = require('express'),
 
 var upload = require('../middlewares/upload');
 
-var ensuareLogIn = require('../middlewares/requireLogedIn');
-
 var router = new Router();
 router.get('/', function profile(req, res) {
-  if (req.currentUser) {
-    res.render('profile');
-  } else {
-    res.redirect('/');
-  }
+  res.render('profile');
 });
 router.post('/', upload.single('avatar'), function (req, res, next) {
   console.log(req.file);

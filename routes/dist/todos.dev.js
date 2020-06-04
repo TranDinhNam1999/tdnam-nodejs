@@ -9,9 +9,6 @@ var router = new Router();
 
 var Todo = require('../services/todos');
 
-var ensuareLogIn = require('../middlewares/requireLogedIn');
-
-router.use(ensuareLogIn);
 router.get('/', asyncHandler(function _callee(req, res) {
   var todos;
   return regeneratorRuntime.async(function _callee$(_context) {
@@ -19,7 +16,7 @@ router.get('/', asyncHandler(function _callee(req, res) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return regeneratorRuntime.awrap(Todo.findAllNotDone(req.currentUser.id));
+          return regeneratorRuntime.awrap(Todo.findAllNotDone(req.user.id));
 
         case 2:
           todos = _context.sent;
@@ -79,7 +76,7 @@ router.post('/', asyncHandler(function _callee3(req, res) {
           }
 
           _context3.next = 4;
-          return regeneratorRuntime.awrap(Todo.add(name, req.currentUser.id));
+          return regeneratorRuntime.awrap(Todo.add(name, req.user.id));
 
         case 4:
           res.redirect('/todo');

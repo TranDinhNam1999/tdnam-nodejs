@@ -1,0 +1,1 @@
+"use strict";var User=require("../services/users");module.exports=function(e,r){console.log(e.user),r.render("index")};

@@ -23,26 +23,33 @@
             <ul class="nav__links">
                 <li><a href="/">Home</a></li>
                 <li>
-                    <a href="<% if(currentUser){ %>/profile<% } else { %> /login <% } %>">
-                        <%= currentUser ? 'Profile' : 'Login' %>
+                    <a href="<% if(user){ %>/profile<% } else { %> /login <% } %>">
+                        <%= user ? 'Profile' : 'Login' %>
+                    </a>
+                    <a href="#">
+                        <%= user.id  %>
                     </a>
                 </li>
                 <li>
-                    <a href="<% if(currentUser){ %>/logout<% } else { %> / <% } %>" id="check">
-                        <%= currentUser ? 'Log Out' : '' %>
+                    <a href="<% if(user){ %>/logout<% } else { %> / <% } %>" id="check">
+                        <%= user ? 'Log Out' : '' %>
                     </a>
                 </li>
             </ul>
         </nav>
-        <a href="<% if(currentUser){ %>/news<% } else { %> / <% } %>" class="cta"><button class="buttonmenu" onclick="check_login()">News</button></a>
-        <a href="<% if(currentUser){ %>/todo<% } else { %> / <% } %>" class="cta"><button class="buttonmenu" onclick="check_login()">To do</button></a>
+        <a href="<% if(user){ %>/news<% } else { %> / <% } %>" class="cta"><button class="buttonmenu" onclick="check_login()">News</button></a>
+        <a href="<% if(user){ %>/todo<% } else { %> / <% } %>" class="cta"><button class="buttonmenu" onclick="check_login()">To do</button></a>
     </header>
-    <div class="formtodo">
-        <div id="myDIV" class="header">
-            <form action="" method="POST">
-                <h2 style="margin:5px">My To Do List</h2>
-                <input type="text" id="myInput" name="nametodo" placeholder="Title...">
-                <button type="submit" class="addBtn">Add</a>
+    <div class="content">
+
+
+        <div class="container">
+            <div class="formtodo">
+                <div id="myDIV" class="header">
+                    <form action="" method="POST">
+                        <h2 style="margin:5px">My To Do List</h2>
+                        <input type="text" id="myInput" name="nametodo" placeholder="Title...">
+                        <button type="submit" class="addBtn">Add</a>
             </form>
         </div>
         <ul id="myUL">
@@ -54,6 +61,7 @@
                 <% }); %>
         </ul>
         </div>
+    </div>
         <script>
             function check_login() {
                 var a = document.getElementsByTagName('LI');
